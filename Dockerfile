@@ -3,7 +3,7 @@ MAINTAINER sinkcup <sinkcup@163.com>
 
 RUN apt-get update -qq
 RUN apt-get upgrade -y
-RUN apt-get install -y subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc flex liblzma-dev u-boot-tools unzip wget
+RUN apt-get install -y build-essential ccache flex gawk gettext git liblzma-dev libncurses5-dev libssl-dev python subversion u-boot-tools unzip wget xsltproc zlib1g-dev
 
 RUN \
   mkdir -p /root/openwrt/ && \
@@ -16,5 +16,9 @@ ADD . /root/openwrt/hc5761/
 RUN \
   cd /root/openwrt/hc5761/ && \
   ./dl.sh
+
+RUN \
+  cd /root/openwrt/hc5761/ && \
+  make package/network/utils/curl/compile V=99
 
 WORKDIR /root/openwrt/hc5761/
