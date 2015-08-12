@@ -8,7 +8,7 @@ RUN apt-get install -y build-essential ccache flex gawk gettext git liblzma-dev 
 RUN \
   mkdir -p /root/openwrt/ && \
   cd /root/openwrt/ && \
-  wget http://7xiizu.com1.z0.glb.clouddn.com/vendors/gee/ralink/hc5761-20140619.tar.gz && \
+  wget http://66x9.x.incapdns.net/vendors/gee/ralink/hc5761-20140619.tar.gz && \
   tar -zxvf hc5761-20140619.tar.gz
 
 ADD . /root/openwrt/hc5761/
