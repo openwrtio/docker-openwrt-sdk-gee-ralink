@@ -3,12 +3,14 @@ MAINTAINER sinkcup <sinkcup@163.com>
 
 RUN apt-get update -qq
 RUN apt-get upgrade -y
-RUN apt-get install -y build-essential ccache flex gawk gettext git liblzma-dev libncurses5-dev libssl-dev python subversion u-boot-tools unzip wget xsltproc zlib1g-dev
+RUN apt-get install -y build-essential ccache curl dnsutils flex gawk gettext git liblzma-dev libncurses5-dev libssl-dev python subversion u-boot-tools unzip wget xsltproc zlib1g-dev
 
 RUN \
   mkdir -p /root/openwrt/ && \
   cd /root/openwrt/ && \
-  wget http://66x9.x.incapdns.net/vendors/gee/ralink/hc5761-20140619.tar.gz && \
+  ip=`nslookup downloads.openwrt.io | grep Address | tail -n 1 | awk '{print $2}'` && \
+  echo $ip && \
+  curl -o hc5761-20140619.tar.gz -H 'Host: downloads.openwrt.io' http://$ip/vendors/gee/ralink/hc5761-20140619.tar.gz && \
   tar -zxvf hc5761-20140619.tar.gz
 
 ADD . /root/openwrt/hc5761/
@@ -19,6 +21,6 @@ RUN \
 
 RUN \
   cd /root/openwrt/hc5761/ && \
-  make package/network/utils/curl/compile V=99
+  make package/network/utils/curl/compile -j V=99
 
 WORKDIR /root/openwrt/hc5761/
