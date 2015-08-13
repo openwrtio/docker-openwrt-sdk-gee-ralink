@@ -8,7 +8,7 @@ RUN apt-get install -y build-essential ccache curl dnsutils flex gawk gettext gi
 RUN \
   mkdir -p /root/openwrt/ && \
   cd /root/openwrt/ && \
-  ip=`nslookup downloads.openwrt.io | grep Address | tail -n 1 | awk '{print $2}'` && \
+  ip=`nslookup downloads.openwrt.io 208.67.222.222 | grep Address | tail -n 1 | awk '{print $2}'` && \
   echo $ip && \
   curl -o hc5761-20140619.tar.gz -H 'Host: downloads.openwrt.io' http://$ip/vendors/gee/ralink/hc5761-20140619.tar.gz && \
   tar -zxvf hc5761-20140619.tar.gz
