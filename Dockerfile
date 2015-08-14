@@ -21,6 +21,7 @@ RUN \
 
 RUN \
   cd /root/openwrt/hc5761/ && \
+  make defconfig && \
   make package/network/utils/curl/compile -j V=99
 
 WORKDIR /root/openwrt/hc5761/
